@@ -1,0 +1,26 @@
+{
+  "name": "02graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"npm start\"",
+    "start": "nodemon dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.7",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.7.9",
+    "express": "^4.21.1",
+    "graphql": "^16.9.0"
+  }
+}
