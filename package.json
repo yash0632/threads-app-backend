@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"npm start\"",
-    "start": "nodemon dist/index.js"
+    "start": "nodemon dist/index.js",
+    "build":"tsc -b"
   },
   "keywords": [],
   "author": "",

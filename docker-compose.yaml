@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  backend:
+    image: backend-graphql
+    container_name: backend_application
+    ports:
+      - 8080:8080
+    
