@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const server_1 = require("@apollo/server");
 const express4_1 = require("@apollo/server/express4");
+const db_1 = require("./lib/db");
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = (0, express_1.default)();
@@ -28,6 +29,26 @@ function init() {
             hello:String,
             say(name:String!):String!
         }
+        type Mutation{
+            createUser(input:UserInput!):User
+        }
+        type User{
+          id:ID!
+          firstName:String!
+          lastName:String!
+          email:String!
+          roll:Int!
+          password:String!
+        }
+
+        input UserInput{
+          firstName: String!
+          lastName: String!
+          profileImageUrl: String
+          email:String!
+          password: String!
+          salt: String
+        }
 
     `,
             resolvers: {
@@ -38,6 +59,27 @@ function init() {
                     say: (_, { name }) => {
                         return "hello " + name;
                     }
+                },
+                Mutation: {
+                    createUser: (_, args) => __awaiter(this, void 0, void 0, function* () {
+                        return yield db_1.prisma.user.create({
+                            data: {
+                                firstName: args.input.firstName,
+                                lastName: args.input.lastName,
+                                email: args.input.email,
+                                password: args.input.password,
+                                salt: args.input.salt || "random_salt"
+                            },
+                            select: {
+                                id: true,
+                                firstName: true,
+                                lastName: true,
+                                email: true,
+                                password: true,
+                                roll: true
+                            }
+                        });
+                    })
                 }
             },
         });
